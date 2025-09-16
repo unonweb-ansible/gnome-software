@@ -34,6 +34,12 @@
         key: "/org/gnome/software/download-updates"
         value: "false"
 
+    - name: Mask packagekit.service
+      become: true
+      ansible.builtin.systemd_service:
+        name: packagekit.service
+        masked: true
+
   # auto_updates == true
   - when: gnome_software.auto_updates == true
     become: true
@@ -49,6 +55,12 @@
       community.general.dconf:
         key: "/org/gnome/software/download-updates"
         value: "true"
+
+    - name: Unmask packagekit.service
+      become: true
+      ansible.builtin.systemd_service:
+        name: packagekit.service
+        masked: false
 
   # auto_start == true
   - when: gnome_software.auto_start == true
