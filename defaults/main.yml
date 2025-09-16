@@ -1,0 +1,5 @@
+---
+gnome_software:
+  user:
+  auto_start: false
+  auto_updates: false
