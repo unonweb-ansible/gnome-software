@@ -1,5 +1,4 @@
 ---
-gnome_software:
-  user:
-  auto_start: false
-  auto_updates: false
+gnome_software_user:
+gnome_software_auto_start: false
+gnome_software_updates: false

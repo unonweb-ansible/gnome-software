@@ -1,12 +1,4 @@
 ---
-# NOTES
-# -----
-# string: "'myvalue'"
-# integer: "5"
-# boolean: "true|false"
-# array: "['first', 'second', ...]"
-# enumeration: "'nothing'"
-
 - name: gnome-software role
   tags:
     - gnome-software
@@ -16,12 +8,12 @@
   - name: Check vars for gnome-software
     ansible.builtin.assert:
       that:
-        - gnome_software.user != None
+        - gnome_software_user != None
 
-  # auto_updates == false
-  - when: gnome_software.auto_updates == false
+  # gnome_software_updates == false
+  - when: gnome_software_updates == false
     become: true
-    become_user: "{{ gnome_software.user }}"
+    become_user: "{{ gnome_software_user }}"
     block:
 
     - name: Set /org/gnome/software/allow-updates to false
@@ -34,10 +26,10 @@
         key: "/org/gnome/software/download-updates"
         value: "false"
 
-  # auto_updates == true
-  - when: gnome_software.auto_updates == true
+  # gnome_software_updates == true
+  - when: gnome_software_updates == true
     become: true
-    become_user: "{{ gnome_software.user }}"
+    become_user: "{{ gnome_software_user }}"
     block:
     
     - name: Set /org/gnome/software/allow-updates to true
@@ -51,7 +43,7 @@
         value: "true"
 
   # auto_start == true
-  - when: gnome_software.auto_start == true
+  - when: gnome_software_auto_start == true
     block:
 
     # cp org.gnome.Software.desktop
@@ -65,7 +57,7 @@
         mode: u=rw,g=r,o=r
 
   # auto_start == false
-  - when: gnome_software.auto_start == false
+  - when: gnome_software_auto_start == false
     block:
 
     # rm org.gnome.Software.desktop
